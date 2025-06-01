@@ -24,7 +24,14 @@ jobs:
       - name: Create .env file
         run: |
           echo "${{ secrets.ENV }}" > .env
-          
+
+      ## Amazon credential
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v3
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ap-northeast-2
 
       - name: Build project
         run: ./gradlew clean build -x test
