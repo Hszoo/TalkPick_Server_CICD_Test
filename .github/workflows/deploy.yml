@@ -55,7 +55,7 @@ jobs:
       - name: Upload CodeDeploy files to S3
         run: |
           zip -r deploy.zip appspec.yml scripts .env
-          aws s3 cp deploy.zip s3://YOUR_S3_BUCKET_NAME/deploy.zip
+          aws s3 cp deploy.zip s3://talkpick/deploy.zip
 
       - name: Trigger CodeDeploy
         run: |
