@@ -24,12 +24,17 @@ jobs:
       - name: Create .env file
         run: |
           echo "${{ secrets.ENV }}" > .env
+          
 
       - name: Build project
         run: ./gradlew clean build -x test
 
       - name: Login to Amazon ECR
         uses: aws-actions/amazon-ecr-login@v2
+        with:
+          mask-password: true
+          env:
+            AWS_REGION: ap-northeast-2
 
       - name: Build & Push Docker image
         env:
