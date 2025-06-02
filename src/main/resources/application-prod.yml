@@ -1,6 +1,6 @@
 jwt:
   secret: ${JWT_SECRET}
-  accessTokenExpireTime: ${secrets.env.EXPIRE_TIME}
+  accessTokenExpireTime: ${JWT_ACCESS_EXPIRE_TIME}
 
 server:
   port: ${TALKPICK_PORT}
