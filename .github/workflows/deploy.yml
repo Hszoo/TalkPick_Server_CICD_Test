@@ -62,6 +62,6 @@ jobs:
           aws deploy create-deployment \
             --application-name TalkPickApp \
             --deployment-group-name TalkPickGroup \
-            --s3-location bucket=YOUR_S3_BUCKET_NAME,key=deploy.zip,bundleType=zip \
+            --s3-location bucket=talkpick,key=deploy.zip,bundleType=zip \
             --deployment-config-name CodeDeployDefault.AllAtOnce \
             --region ap-northeast-2
