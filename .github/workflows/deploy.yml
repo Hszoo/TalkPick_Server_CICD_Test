@@ -60,7 +60,7 @@ jobs:
       - name: Trigger CodeDeploy
         run: |
           aws deploy create-deployment \
-            --application-name TalkPickApp \
+            --application-name talkpick-server \
             --deployment-group-name TalkPickGroup \
             --s3-location bucket=talkpick,key=deploy.zip,bundleType=zip \
             --deployment-config-name CodeDeployDefault.AllAtOnce \
