@@ -61,7 +61,7 @@ jobs:
         run: |
           aws deploy create-deployment \
             --application-name talkpick-server \
-            --deployment-group-name TalkPickGroup \
+            --deployment-group-name Production \
             --s3-location bucket=talkpick,key=deploy.zip,bundleType=zip \
             --deployment-config-name CodeDeployDefault.AllAtOnce \
             --region ap-northeast-2
