@@ -15,7 +15,7 @@ docker rm -f TalkPick_Server || true
 # 새 컨테이너 실행
 docker run -d \
   --name TalkPick_Server \
-  -p 3000:3000 \
+  -p 8080:8080 \
   --env-file /home/ubuntu/TalkPick_Server_CICD_Test/.env \
   536697254327.dkr.ecr.ap-northeast-2.amazonaws.com/talkpick-server:latest
 
