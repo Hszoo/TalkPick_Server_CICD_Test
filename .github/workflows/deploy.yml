@@ -51,16 +51,17 @@ jobs:
           docker tag $ECR_REPOSITORY:latest $ECR_REGISTRY/$ECR_REPOSITORY:latest
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:latest
 
-      - name: Upload CodeDeploy files to S3
-        run: |
-          zip -r deploy.zip appspec.yml scripts .env
-          aws s3 cp deploy.zip s3://talkpick/deploy.zip
-
-      - name: Trigger CodeDeploy
-        run: |
-          aws deploy create-deployment \
-            --application-name talkpick-server \
-            --deployment-group-name Production \
-            --s3-location bucket=talkpick,key=deploy.zip,bundleType=zip \
-            --deployment-config-name CodeDeployDefault.AllAtOnce \
-            --region ap-northeast-2
+      - name: Deploy via SSH
+        uses: appleboy/ssh-action@v1.0.0
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ubuntu
+          key: ${{ secrets.EC2_SSH_KEY }}
+          script: |
+            cd ~/TalkPick_Server_CICD_Test
+            rm -f docker-compose.yml .env
+            curl -O https://raw.githubusercontent.com/${{ github.repository }}/main/docker-compose.yml
+            echo "${{ secrets.ENV }}" > .env
+            docker-compose down
+            docker-compose pull
+            docker-compose up -d --build
