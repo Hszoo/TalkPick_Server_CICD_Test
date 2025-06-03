@@ -60,7 +60,7 @@ jobs:
           script: |
             cd ~/TalkPick_Server_CICD_Test
             rm -f docker-compose.yml .env
-            curl -O https://raw.githubusercontent.com/${{ github.repository }}/main/docker-compose.yml
+            curl -O https://github.com/Hszoo/TalkPick_Server_CICD_Test/blob/main/docker-compose.yml
             echo "${{ secrets.ENV }}" > .env
             docker-compose down
             docker-compose pull
