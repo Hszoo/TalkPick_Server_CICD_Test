@@ -34,6 +34,10 @@ spring:
     multipart:
       max-file-size: ${MAX_FILE_SIZE}
       max-request-size: ${MAX_REQUEST_SIZE}
+  data:
+    redis:
+      host: ${REDIS_HOST}
+      port: 6379
   messages:
     basename: messages,errors
 
