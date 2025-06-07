@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.databind.jsontype.BasicPolymorphicTypeValidator;
 import com.fasterxml.jackson.databind.jsontype.PolymorphicTypeValidator;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;
@@ -24,6 +25,12 @@ import static org.springframework.data.redis.serializer.RedisSerializationContex
 @Configuration
 @EnableCaching
 public class RedisCacheConfig {
+    @Value("${REDIS_HOST}")
+    private String redisHost;
+
+    @Value("${REDIS_PORT}")
+    private int redisPort;
+
     private ObjectMapper objectMapper() {
         PolymorphicTypeValidator typeValidator = BasicPolymorphicTypeValidator.builder()
                 .allowIfSubType(Object.class)
@@ -46,7 +53,7 @@ public class RedisCacheConfig {
 
     @Bean
     public RedisConnectionFactory redisConnectionFactory() {
-        return new LettuceConnectionFactory();
+        return new LettuceConnectionFactory(redisHost, redisPort);
     }
 
     private RedisCacheConfiguration defaultCacheConfiguration() {
