@@ -6,6 +6,7 @@ services:
       - "6379:6379"
     networks:
       - talk-pick-network
+      - t4y
     healthcheck:
       test: ["CMD", "redis-cli", "ping"]
       interval: 10s
